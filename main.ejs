@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">    <title>Sistem Kendali Pemanas</title>
+    <link rel="stylesheet" href="css/stylemain.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <link rel="stylesheet" href="css/lineicons.css" />
+  </head>
+
+  <body>
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+            <div class="mt-3 mx-auto">
+                <h5 class="text-center"><strong> Select Control Mode</strong></h5>
+                <select id="mode" class="form-select rounded-0" required>
+                    <option disabled selected>Choice Mode</option>
+                    <option value="satuposisi">Satu Posisi</option>
+                    <option value="duaposisi">Dua Posisi</option>
+                    <option value="p">P</option>
+                    <option value="pd">PD</option>
+                    <option value="pid">PID</option>
+                </select>
+            </div>
+            <div class="mb-1">
+              <label for="time_sampling">Sampling Time (s)</label>
+              <input
+                type="number" class="form-control rounded-0"
+                id="time_sampling"
+                name="time_sampling"
+                value=""
+                step="0.1"
+                placeholder="Enter times you'r needs"
+                required
+              />
+            </div>
+            <div id="input-fields" class="mt-3"></div>
+            <div class="text-center mt-3 ">
+                <button id="start" class="btn btn-success">START</button>
+                <button id="stop" class="btn btn-danger">STOP</button>
+                <div class="text-center mt-2">
+                  <button id="clear" class="btn btn-primary border-1 rounded w-75 mb-2">CLEAR</button>
+                  <button id="exportcsv" class="btn btn-primary border-1 rounded w-75" onclick="exportToCSV()">Export to CSV</button>
+                </div>
+            </div>
+        </div>
+
+    <nav class="navbar navbar-expand">
+    <div class="container-fluid">
+          <button id="toggleSidebar" type="button" class="btn-hover rounded">
+            <img src="images/DashboardSquare1.png" width="33" height="33">
+          </button>
+            <div class="mx-auto">
+                <h4 class="top_tittle" style="color: aliceblue;">Modul Praktikum Kendali PID pada Pemanas Berbasis Internet of Things</h4>
+            </div>
+            <div class="ms-0 dropdown">
+              <button class="btn-hover rounded dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="images/user.png" width="30" height="30" alt="User" class="rounded-circle">
+              </button>            
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <div class="dropdown-item text-start">
+                    <strong> <%= user.nama %></strong><br>
+                    <small><%= user.nim %></small>_<small><%= user.kelas %></small>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown">
+                  <form action="/logout" method="post">
+                    <button id="logout" type="submit" class="btn btn-danger ms-4">Log Out</button>
+                </form>
+                </a>
+        </div>
+    </nav>
+  </div>
+
+    </div>
+    <div class="container-fluid mx-0 px-auto border-0">
+      <canvas id="realTimeChart"></canvas>
+    </div>
+
+    <script src="javascripts/main.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="javascripts/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  </body>
+</html>
